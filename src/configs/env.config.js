@@ -10,3 +10,5 @@ export const DB_NAME = process.env.DB_NAME
 export const BASE_URL = process.env.BASE_URL
 export const JWT_SECRET = process.env.JWT_SECRET
 export const PORT = process.env.PORT
+
+/* https://verify-krypton.onrender.com/api/v1/verify-otp */
