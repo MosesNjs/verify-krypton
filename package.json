@@ -3,7 +3,7 @@
   "name": "verify-krypton",
   "version": "1.0.0",
   "script": {
-    "start": "node index.js",
+    "start": "node src/index.js",
     "test": "npm test"
   },
   "main": "index.js",
