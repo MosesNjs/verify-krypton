@@ -10,10 +10,12 @@ export const verifyToken = (token) => {
 
 export const getUserIdFromToken = (token) => {
     if (token.startsWith('Bearer ')) {
+        console.log('token:', token);
         token = token.slice(7, token.length).trimLeft();
     }
 
     const decoded = jwt.verify(token, config.jwtSecret);
+    console.log('decoded:', decoded);
     return decoded.userId;
 };
 
