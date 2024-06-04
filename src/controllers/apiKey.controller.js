@@ -18,7 +18,7 @@ export const invalidateApiKey = async (req, res) => {
     try {
         const apiKey = req.headers['x-api-key'];
         const result = await apiKeyService.invalidateApiKey(apiKey);
-        return sendResponse(res, 200, true, '', result)
+        return sendResponse(res, 200, true, 'API key validated successfully.', result)
     } catch (e) {
         console.error('Error invalidating API key:', e);
         return sendResponse(res, 500, false, e.message)

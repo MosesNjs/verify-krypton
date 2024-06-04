@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-export default async (to, subject, content) => {
+const sendEmail = async (to, subject, content) => {
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
         try {
 
@@ -64,4 +64,4 @@ export const sendOtpEmail = async (email, otp) => {
     await sendEmail(email, 'Your OTP code', content);
 };
 
-export const emailService = { sendConfirmationEmail, sendOtpEmail };
+export default sendEmail
