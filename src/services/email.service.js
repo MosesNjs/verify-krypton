@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 
 const MAX_RETRIES = 3;
 
-// Nodemailer SMTP config for Google because honestly, Elasticemail sucks.
+// Nodemailer SMTP config for Google.
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {

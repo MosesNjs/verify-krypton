@@ -38,14 +38,14 @@ class FileService {
     }
 
 
-  async downloadFile(userId, fileId) {
+  async downloadFile(_id, fileId) {
     try {
       const isValidApiKey = await verifyApiKey(apiKey);
       if (!isValidApiKey) {
         throw new Error('Invalid API key');
       }
 
-      const user = await UserModel.findById(userId);
+      const user = await UserModel.findById(_id);
       if (!user) {
         throw new Error('User not found');
       }
@@ -65,14 +65,14 @@ class FileService {
     }
   }
 
-  async updateFile(userId, fileId, newFile) {
+  async updateFile(_id, fileId, newFile) {
     try {
       const isValidApiKey = await verifyApiKey(apiKey);
       if (!isValidApiKey) {
         throw new Error('Invalid API key');
       }
 
-      const user = await UserModel.findById(userId);
+      const user = await UserModel.findById(_id);
       if (!user) {
         throw new Error('User not found');
       }
@@ -93,14 +93,14 @@ class FileService {
     }
   }
 
-  async deleteFile(userId, fileId) {
+  async deleteFile(_id, fileId) {
     try {
       const isValidApiKey = await verifyApiKey(apiKey);
       if (!isValidApiKey) {
         throw new Error('Invalid API key');
       }
 
-      const user = await UserModel.findById(userId);
+      const user = await UserModel.findById(_id);
       if (!user) {
         throw new Error('User not found');
       }
