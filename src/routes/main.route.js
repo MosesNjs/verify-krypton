@@ -13,22 +13,22 @@ import welcomeMessage from '../middlewares/welcome.middleware.js';
 const mainRouter = express.Router();
 const upload = multer();
 
-// Welcome route
+// Main welcome route
 mainRouter.get('/', welcomeMessage);
 
-// Registration and Authentication
+// Registration & Authentication
 mainRouter.post('/register', registrationController.register); 
 mainRouter.get('/confirm-email/:token', registrationController.confirmEmail);
 mainRouter.post('/login', loginController.login);
 mainRouter.post('/verify-otp', loginController.verifyOtp);
 
-// API Key Management
+// For API Key Management
 mainRouter.post('/invalidate-api-key', authenticate, invalidateApiKey);
 
 // Updated route for generating API key
 mainRouter.post('/generate-api-key', authenticate, generateApiKey);
 
-// File Upload and Management
+// For File Upload and Management
 mainRouter.post('/upload', requireApiKey, upload.single('file'), fileController.upload);
 mainRouter.get('/download/:userId/:fileId', requireApiKey, fileController.download);
 mainRouter.put('/update/:userId/:fileId', requireApiKey, upload.single('file'), fileController.update);

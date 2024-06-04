@@ -15,7 +15,7 @@ class RegistrationService {
         }
     
         try {
-          // Checking for pre-existing users
+          // Check for existing users
           const existingUser = await UserModel.findOne({ email });
           if (existingUser) {
             throw new Error('User already exists');
@@ -40,7 +40,7 @@ class RegistrationService {
       }
     async confirmEmail(token) {
         try {
-            // Verifying the token
+            // Verifying token ...
             const { email } = verifyToken(token);
             const user = await UserModel.findOneAndUpdate(
                 { email },
