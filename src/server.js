@@ -20,6 +20,17 @@ app.use('/api/v1/docs', (req, res) => {
   res.redirect(301, DOCS_URL)
 });
 
+app.get('/', (req, res) => {
+  return res.send('Welcome to MosKrypton API. Lets go save the galaxy!')
+});
+
+app.use((req, res) => {
+  return res.status(404).json({
+    message: 'The resource you are looking for does not exist.',
+    success: false
+  })
+});
+
 // Middleware for error handling
 app.use((err, req, res, next) => {
   console.error(err.stack);
