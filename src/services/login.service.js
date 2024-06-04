@@ -1,5 +1,5 @@
 import UserModel from '../models/user.model.js';
-import emailService from '../services/email.service.js';
+import { sendConfirmationEmail, sendOtpEmail } from '../services/email.service.js';
 import bcrypt from 'bcrypt';
 import { generateToken } from '../utils/token.utils.js';
 import { generateOtp } from '../utils/otp.utils.js';
@@ -25,7 +25,7 @@ class LoginService {
             }
             await redisClient.setEx(`otp:${email}`, 300, otp);
 
-            await emailService.sendOtpEmail(email, otp);
+            await sendOtpEmail(email, otp);
 
             return { message: 'OTP sent to your email' };
         } catch (error) {

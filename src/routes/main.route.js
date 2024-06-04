@@ -1,6 +1,5 @@
 // routes/main.route.js
 import express from 'express';
-import multer from 'multer';
 import { getUserIdFromToken } from '../utils/token.utils.js'
 import { invalidateApiKey, generateApiKey } from '../controllers/apiKey.controller.js';
 import fileController from '../controllers/file.controller.js';
@@ -9,16 +8,16 @@ import loginController from '../controllers/login.controller.js';
 import registrationController from '../controllers/registration.controller.js';
 import authenticate,{ isSupergirl, requireApiKey } from '../middlewares/auth.middleware.js';
 import welcomeMessage from '../middlewares/welcome.middleware.js';
+import upload from '../middlewares/upload.middleware.js';
 
 const mainRouter = express.Router();
-const upload = multer();
 
 // Main welcome route
 mainRouter.get('/', welcomeMessage);
 
 // Registration & Authentication
 mainRouter.post('/register', registrationController.register); 
-mainRouter.get('/confirm-email/:token', registrationController.confirmEmail);
+mainRouter.get('/confirm-email/:token', registrationController.verifyEmail);
 mainRouter.post('/login', loginController.login);
 mainRouter.post('/verify-otp', loginController.verifyOtp);
 
@@ -29,9 +28,9 @@ mainRouter.post('/invalidate-api-key', authenticate, invalidateApiKey);
 mainRouter.post('/generate-api-key', authenticate, generateApiKey);
 
 // For File Upload and Management
-mainRouter.post('/upload', requireApiKey, upload.single('file'), fileController.upload);
+mainRouter.post('/upload', [requireApiKey, upload(1)], fileController.upload);
 mainRouter.get('/download/:userId/:fileId', requireApiKey, fileController.download);
-mainRouter.put('/update/:userId/:fileId', requireApiKey, upload.single('file'), fileController.update);
+mainRouter.put('/update/:userId/:fileId', [requireApiKey, upload(1)], fileController.update);
 mainRouter.delete('/delete/:userId/:fileId', requireApiKey, fileController.delete);
 
 // Image Access (authenticated users)
